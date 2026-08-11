@@ -28,11 +28,11 @@ tarball (attached to the matching GitHub Release) rather than a source build, `d
 exposes both console entry points (`docker-mcp-server` and `docker-mcp`) matching the package's
 own dual-name convention.
 
-`skip_clean "libexec"` (added by hand, see caveat below) tells Homebrew's post-install linkage
-fixer to leave the venv alone: Python loads its compiled extension `.so` files (notably
-`pydantic_core`, a dependency of the `mcp` SDK) directly by path, never via the dylib ID Homebrew's
-fixer tries to rewrite, so skipping that step is safe — and necessary, because the pre-built wheels
-don't have the header room for the fixer to write a longer absolute path into anyway (see below).
+`skip_clean "libexec"` (added by hand, see caveat below) tells Homebrew's post-install **cleanup**
+phase (stripping symbols, pruning `.la` files, etc.) to leave the venv alone — it does not by
+itself disable the separate keg-relocation step that rewrites dylib IDs via `install_name_tool`.
+Whether skipping cleanup on `libexec` is actually sufficient to route around the header-padding
+failure described below is exactly the part that's unverified — see the caveat.
 
 **Caveat — stale and mid-fix.** This formula currently sits at `v1.9.2` and still names the
 pre-org-migration repo (`GavinLucas/docker-mcp`, not `L337-org/docker-mcp`) because
