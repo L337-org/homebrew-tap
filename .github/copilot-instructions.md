@@ -34,19 +34,24 @@ itself disable the separate keg-relocation step that rewrites dylib IDs via `ins
 Whether skipping cleanup on `libexec` is actually sufficient to route around the header-padding
 failure described below is exactly the part that's unverified — see the caveat.
 
-**Caveat — stale and mid-fix.** This formula currently sits at `v1.9.2` and still names the
-pre-org-migration repo (`GavinLucas/docker-mcp`, not `L337-org/docker-mcp`) because
-`publish-homebrew.yaml`'s release trigger has been disabled (`workflow_dispatch`-only) since before
-the org move, pending confirmation of a real fix for a Homebrew dylib-linkage failure: pre-built
-`pydantic_core` wheels lack `-headerpad_max_install_names`, so Homebrew's relocation step fails to
-rewrite the `@rpath` ID on install. `skip_clean "libexec"` above was added directly to this repo's
-copy (commit `53b5c8e`, June 2026) as a candidate fix, ahead of and outside the normal
-template→workflow→push path — it has **not** been round-tripped into `docker-mcp`'s template, and
-the channel is still paused, so treat it as unverified rather than as evidence the issue is closed.
-Don't "helpfully" refresh this formula to the current version or org name by hand; that's the
-generator's job once the channel is re-enabled upstream. If you're looking into re-enabling the
-channel, start in `docker-mcp`'s CLAUDE.md ("Homebrew tap" section) and `publish-homebrew.yaml`, not
-here.
+**Caveat — stale and paused.** This formula sits at `v1.9.2` while upstream releases have carried
+on without it, because `publish-homebrew.yaml`'s release trigger has been disabled
+(`workflow_dispatch`-only) since before the org move, pending confirmation of a real fix for a
+Homebrew dylib-linkage failure: pre-built `pydantic_core` wheels lack
+`-headerpad_max_install_names`, so Homebrew's relocation step fails to rewrite the `@rpath` ID on
+install. `skip_clean "libexec"` above was first added directly to this repo's copy (commit
+`53b5c8e`, June 2026) as a candidate fix, ahead of the normal template→workflow→push path; it was
+round-tripped into `docker-mcp`'s template shortly afterwards (that repo's `5645103`, 2026-06-25),
+so the two agree on it now. It is still unverified — treat it as a candidate, not as evidence the
+issue is closed.
+
+**Don't refresh the version by hand** — that stays the generator's job once the channel is
+re-enabled upstream. The pre-move `GavinLucas/docker-mcp` `homepage` and release URLs *were*
+corrected here by hand, in the same change that switched the README from advertising the channel to
+documenting the pause; the reasoning recorded there is that the template already emits `L337-org`,
+so the edit closed drift rather than opening it. `version` and both `sha256` values were left
+alone. If you're looking into re-enabling the channel, start in `docker-mcp`'s CLAUDE.md ("Homebrew
+tap" section) and `publish-homebrew.yaml`, not here.
 
 ## Updating a formula / testing expectations
 

@@ -13,10 +13,13 @@ class DockerMcpServer < Formula
   depends_on "python@3.14"
   depends_on "uv" => :build
 
-  # Prevent Homebrew's post-install linkage fixer from rewriting @rpath IDs
-  # in Python extension .so files inside the virtualenv. Those binaries do not
-  # have headerpad room for longer absolute paths and do not need relinking:
-  # Python loads them directly by path, not via the dylib ID.
+  # Keep Homebrew's post-install cleanup phase (stripping symbols, pruning .la files, fixing
+  # permissions) out of the virtualenv, so it leaves the Python extension .so files alone.
+  #
+  # This is only a candidate workaround for the headerpad failure that paused this channel, and
+  # an unverified one: skip_clean affects the cleanup phase only. It does not disable the separate
+  # keg-relocation step that rewrites dylib IDs via install_name_tool, which is where that failure
+  # actually occurs. See the tap README.
   skip_clean "libexec"
 
   on_macos do

@@ -5,15 +5,16 @@ Homebrew tap for [L337-org/docker-mcp-server](https://github.com/L337-org/docker
 ## Status: paused
 
 **This channel is not currently supported, and the formula in this tap is not up to date.**
-`Formula/docker-mcp-server.rb` is frozen at 1.9.2 against a current release of
-[v2.2.3](https://github.com/L337-org/docker-mcp/releases/latest). It is kept here as the record
-of where the channel got to, not as something to install.
+`Formula/docker-mcp-server.rb` is frozen at 1.9.2, a major version and several minors behind the
+[current release](https://github.com/L337-org/docker-mcp/releases/latest). It is kept here as the
+record of where the channel got to, not as something to install.
 
 The pause is a linkage problem rather than a packaging oversight. Pre-built PyPI wheels for
 `pydantic_core` are not built with `-headerpad_max_install_names`, so Homebrew's post-install
 relocation step has no room in the Mach-O header to rewrite the `@rpath` ID to a longer absolute
-path, and the install fails. The `skip_clean "libexec"` line in the formula was an attempt at
-working around that.
+path, and the install fails. The `skip_clean "libexec"` line in the formula was a candidate
+workaround for that, and an unverified one: it keeps the cleanup phase out of the virtualenv but
+does not affect the relocation step itself.
 
 ## Installing docker-mcp-server
 
