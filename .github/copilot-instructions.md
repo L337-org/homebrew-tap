@@ -50,8 +50,8 @@ re-enabled upstream. The pre-move `GavinLucas/docker-mcp` `homepage` and release
 corrected here by hand, in the same change that switched the README from advertising the channel to
 documenting the pause; the reasoning recorded there is that the template already emits `L337-org`,
 so the edit closed drift rather than opening it. `version` and both `sha256` values were left
-alone. If you're looking into re-enabling the channel, start in `docker-mcp`'s CLAUDE.md ("Homebrew
-tap" section) and `publish-homebrew.yaml`, not here.
+alone. If you're looking into re-enabling the channel, start in `docker-mcp`'s
+`architecture/distribution.md` ("Homebrew tap" section) and `publish-homebrew.yaml`, not here.
 
 ## Updating a formula / testing expectations
 
