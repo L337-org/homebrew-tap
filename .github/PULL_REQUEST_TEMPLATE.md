@@ -11,5 +11,5 @@
 ## Checklist
 
 - [ ] `Formula/*.rb` is unchanged - or, if it is a hand-verified stopgap, the same fix has landed in `docker-mcp`'s `scripts/docker-mcp-server.rb.tpl`, because a release regenerates the formula and silently reverts anything fixed only here
-- [ ] If a formula did change: `brew install --build-from-source ./Formula/<name>.rb`, `brew test <name>` and `brew audit --strict --online ./Formula/<name>.rb` all pass on the platform the change targets
+- [ ] If a formula did change: `brew install ./Formula/<name>.rb` (with `--build-from-source`, unless the formula fetches a prebuilt asset), `brew test <name>` and `brew audit --strict --online ./Formula/<name>.rb` all pass on the platform the change targets
 - [ ] If this changes how the channel is described or re-enabled: `README.md` and `.github/copilot-instructions.md` agree with each other, and neither points at a heading in another repository that no longer exists
