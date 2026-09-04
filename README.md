@@ -33,7 +33,9 @@ for client configuration.
 The trigger lives in the docker-mcp repo, not here:
 [publish-homebrew.yaml](https://github.com/L337-org/docker-mcp/blob/main/.github/workflows/publish-homebrew.yaml)
 is `workflow_dispatch`-only, and `scripts/docker-mcp-server.rb.tpl` is the template this formula
-is generated from. The steps are recorded in that repo's `CLAUDE.md` under "Homebrew tap".
+is generated from. The steps are recorded in that repo's
+[`architecture/distribution.md`](https://github.com/L337-org/docker-mcp/blob/main/architecture/distribution.md)
+under "Homebrew tap".
 
 Once the linkage issue is resolved and a release regenerates the formula, the install form is:
 
