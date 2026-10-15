@@ -2,9 +2,12 @@
 
 ## What this repo is
 
-A [Homebrew tap](https://docs.brew.sh/Taps) — a `brew tap l337-org/tap` source, nothing else. It
+A [Homebrew tap](https://docs.brew.sh/Taps) - a `brew tap l337-org/tap` source, nothing else. It
 holds only `Formula/*.rb` and this repo's own docs; there is no application code, no CI, and (as
-of this file) no build pipeline defined *in this repo*. Formulae are consumed with
+of this file) no build pipeline defined *in this repo*.  Its one workflow,
+`.github/workflows/announce-pull-requests.yaml`, posts each pull request that needs action to
+Slack through the shared announcer in `L337-org/github-workflows`; it builds and tests nothing,
+and `.github/dependabot.yml` keeps its reference up to date. Formulae are consumed with
 `brew install l337-org/tap/<name>`.
 
 ## How a formula gets here
