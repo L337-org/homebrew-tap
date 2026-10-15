@@ -1,0 +1,12 @@
+# The workflow here references a shared workflow, so the github-actions ecosystem is watched and
+# its references are proposed for update rather than left to age.  One grouped pull request a week.
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      actions:
+        patterns:
+          - "*"
